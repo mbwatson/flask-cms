@@ -10,4 +10,4 @@ This is simply a general exploration into how one may create a flask-based cms f
 
 ## To Use
 
-Clone this repo, and fire up your python development server by executing `python main.py` and pointing your browser at `localhost:5000`. You'll need to `pip install` the following packages: `markdown`, `pathlib`, and `flask`.
+Clone this repo, and fire up your python development server by executing `python main.py`. Then point your browser at `localhost:5000`. You'll also need to `pip install` the following packages: `markdown`, `pathlib`, and `flask`.
