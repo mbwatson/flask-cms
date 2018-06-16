@@ -25,7 +25,7 @@ class Page():
 			with open(content_file, 'r') as f:
 				content = Markup(markdown.markdown(f.read()))
 		return content
-	def build_page(self):
+	def build(self):
 		template = self.config['template']
 		content = self.content
 		return render_template(f'{template}.html', page_content=content)
@@ -34,32 +34,32 @@ class Page():
 @app.route('/')
 def index():
 	page = Page('index')
-	return page.build_page()
+	return page.build()
 
 @app.route('/about')
 def about():
 	page = Page('about')
-	return page.build_page()
+	return page.build()
 
 @app.route('/services')
 def services():
 	page = Page('services')
-	return page.build_page()
+	return page.build()
 
 @app.route('/products')
 def products():
 	page = Page('products')
-	return page.build_page()
+	return page.build()
 
 @app.route('/gallery')
 def gallery():
 	page = Page('gallery')
-	return page.build_page()
+	return page.build()
 
 @app.route('/contact')
 def contact():
 	page = Page('contact')
-	return page.build_page()
+	return page.build()
 
 # Error Pages
 @app.errorhandler(404)
