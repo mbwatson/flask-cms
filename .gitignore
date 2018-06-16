@@ -1,1 +1,3 @@
 ./__pycache__
+./.sass-cache
+./static/scss
