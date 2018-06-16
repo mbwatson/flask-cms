@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	{% include '_nav.html' %}
+	
+	<main>
+		<div class="sidebar">
+			{% include '_sidebar.html' %}
+		</div>
+		<div class="content">
+			{{ page_content }}
+		</div>
+	</main>
+
+	{% include '_footer.html' %}
+
+	{% include '_scripts.html' %}
+
+{% endblock %}

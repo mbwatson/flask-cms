@@ -1,42 +1,65 @@
 from flask import Flask, render_template, Markup
 import markdown
+import json
+import pathlib
 
 app = Flask(__name__)
 
-def get_markdown(filename):
-	with open('content/{}.md'.format(filename), 'r') as f:
-		md = Markup(markdown.markdown(f.read()))
-	return md
+class Page():
+	def __init__(self, page_name):
+		self.name = page_name
+		self.config = self.get_config()
+		self.template = self.config['template']
+		self.content = self.get_content()
+	def get_config(self):
+		data = { 'template': 'default' }
+		config_file = pathlib.Path(f'content/{self.name}.json')
+		if config_file.is_file():
+			with config_file.open('r') as f:
+				data = json.load(f)
+		return data
+	def get_content(self):
+		content = ''
+		content_file = pathlib.Path(f'content/{self.name}.md')
+		if content_file.is_file():
+			with open(content_file, 'r') as f:
+				content = Markup(markdown.markdown(f.read()))
+		return content
+	def build_page(self):
+		template = self.config['template']
+		content = self.content
+		return render_template(f'{template}.html', page_content=content)
 
 # Main Routes
 @app.route('/')
 def index():
-	return render_template('page.html')
+	page = Page('index')
+	return page.build_page()
 
 @app.route('/about')
 def about():
-	content = get_markdown('about')
-	return render_template('page.html', page_content=content)
+	page = Page('about')
+	return page.build_page()
 
 @app.route('/services')
 def services():
-	content = get_markdown('services')
-	return render_template('page.html', page_content=content)
+	page = Page('services')
+	return page.build_page()
 
 @app.route('/products')
 def products():
-	content = get_markdown('products')
-	return render_template('page.html', page_content=content)
+	page = Page('products')
+	return page.build_page()
 
 @app.route('/gallery')
 def gallery():
-	content = get_markdown('gallery')
-	return render_template('page.html', page_content=content)
+	page = Page('gallery')
+	return page.build_page()
 
 @app.route('/contact')
 def contact():
-	content = get_markdown('contact')
-	return render_template('page.html', page_content=content)
+	page = Page('contact')
+	return page.build_page()
 
 # Error Pages
 @app.errorhandler(404)
