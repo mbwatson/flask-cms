@@ -53,7 +53,7 @@ body {
   min-height: 100vh; }
 
 main {
-  padding: 1em;
+  padding: 0;
   margin: auto;
   flex: 1;
   display: flex;
@@ -61,9 +61,10 @@ main {
   justify-content: space-between; }
   main .sidebar {
     flex: 0 1 300px;
-    margin-right: 2em; }
+    margin: 0 1em 0 2em; }
   main .content {
     flex: 2;
+    margin: 0 2em 0 1em;
     min-width: 66vw; }
 
 /*# sourceMappingURL=main.css.map */
