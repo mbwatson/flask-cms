@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Markup
 import markdown
-import json
+import yaml
 import pathlib
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ class Page():
 		config_file = pathlib.Path(f'content/{self.name}.json')
 		if config_file.is_file():
 			with config_file.open('r') as f:
-				data = json.load(f)
+				data = yaml.load(f)
 		return data
 	def get_content(self):
 		content = ''
@@ -31,6 +31,7 @@ class Page():
 		return render_template(f'{template}.html', page_content=content)
 
 # Main Routes
+
 @app.route('/')
 def index():
 	page = Page('index')
@@ -51,17 +52,13 @@ def products():
 	page = Page('products')
 	return page.build()
 
-@app.route('/gallery')
-def gallery():
-	page = Page('gallery')
-	return page.build()
-
 @app.route('/contact')
 def contact():
 	page = Page('contact')
 	return page.build()
 
-# Error Pages
+# Error Page Routes
+
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template('404.html'), 404
