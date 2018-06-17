@@ -1,3 +1,4 @@
-./__pycache__
-./.sass-cache
-./static/scss
+./flaskcms/__pycache__
+./flaskcms/.sass-cache
+./flaskcms/static/scss
+./flaskcms.egg-info/
