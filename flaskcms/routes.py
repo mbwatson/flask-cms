@@ -1,3 +1,4 @@
+from flask import render_template
 from flaskcms import app
 from flaskcms.models import Page
 
